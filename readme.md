@@ -62,8 +62,7 @@ project-root/
 │
 └── README.md
 
-yaml
-Copy code
+
 
 ---
 
@@ -80,24 +79,27 @@ IMAGEKIT_PUBLIC_KEY=your_public_key
 IMAGEKIT_PRIVATE_KEY=your_private_key
 IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_folder
 FRONTEND_URL=http://localhost:5173
+
 💻 Frontend (.env)
 env
-Copy code
+
 VITE_API_BASE_URL=http://localhost:4000/api
 VITE_STRIPE_PUBLIC_KEY=pk_test_...
 VITE_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_folder
+
 ⚙️ Setup Instructions
+
 1️⃣ Backend
 bash
-Copy code
+
 cd backend
 npm install
 npm run dev
-➡ Runs at: http://localhost:4000
+➡ Runs at: http://localhost:3000
 
 2️⃣ Frontend
 bash
-Copy code
+
 cd frontend
 npm install
 npm run dev
@@ -108,7 +110,6 @@ All images and videos (like food photos, restaurant banners, and reels) are uplo
 
 Example Upload Code
 js
-Copy code
 const ImageKit = require('imagekit');
 
 const imagekit = new ImageKit({
@@ -131,7 +132,7 @@ const uploadResponse = await imagekit.upload({
 💳 Stripe Payment Flow
 Backend
 js
-Copy code
+
 const paymentIntent = await stripe.paymentIntents.create({
   amount: totalAmount * 100, // in paise
   currency: 'inr',
@@ -140,7 +141,7 @@ const paymentIntent = await stripe.paymentIntents.create({
 res.json({ clientSecret: paymentIntent.client_secret });
 Frontend
 js
-Copy code
+
 const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 const { data } = await axios.post(`${API}/payments/create-intent`);
 🎥 Reels Feature
@@ -163,7 +164,7 @@ caption, tags, userId
 
 🧱 Sample Reel Schema
 js
-Copy code
+
 const reelSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   videoUrl: String,
