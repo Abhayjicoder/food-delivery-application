@@ -1,0 +1,32 @@
+/* Animated background base */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* subtle blur overlay to blend with content */
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(2px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* variant-specific tweaks */
+.animated-bg--particles { opacity: 0.9 }
+.animated-bg--orbs { opacity: 0.95 }
+
+/* make page content sit above background */
+.reels-page, .landing-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* small utility to ensure header and collage sit on top */
+.saved-header, .saved-collage, .saved-actions { position: relative; z-index: 3 }

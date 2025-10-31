@@ -1,0 +1,74 @@
+/* Consolidated global style imports */
+@import './styles/theme.css';
+@import './styles/animations.css';
+@import './styles/auth-shared.css';
+@import './styles/bottom-nav.css';
+@import './styles/cart.css';
+@import './styles/create-food.css';
+@import './styles/landing.css';
+@import './styles/logo.css';
+@import './styles/orders.css';
+@import './styles/payment.css';
+@import './styles/profile.css';
+@import './styles/reels.css';
+@import './styles/toast.css';
+@import './styles/about.css';
+@import './styles/careers.css';
+
+/* Global base styles */
+/* Note: Theme variables and body colors are defined in ./styles/theme.css (imported in App.jsx) */
+
+/* Box sizing reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margins */
+body {
+  margin: 0;
+}
+
+/* Improve text rendering and layout defaults */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* App root should stretch full height */
+html, body, #root {
+  height: 100%;
+}
+
+/* Media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form elements inherit fonts/colors */
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Links inherit color; components can override */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Create a new stacking context for the app */
+#root { isolation: isolate; }
+
+
+

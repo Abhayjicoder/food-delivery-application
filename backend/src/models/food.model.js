@@ -9,6 +9,9 @@ const foodSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    videoFileId: {
+        type: String,
+    },
     description: {
         type: String,
     },
@@ -23,6 +26,10 @@ const foodSchema = new mongoose.Schema({
     savesCount: {
         type: Number,
         default: 0
+    },
+    price: {
+        type: Number,
+        required: true
     }
 })
 

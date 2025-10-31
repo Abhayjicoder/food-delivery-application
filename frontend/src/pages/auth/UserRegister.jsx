@@ -28,7 +28,7 @@ const UserRegister = () => {
 
         console.log(response.data);
 
-        navigate("/")
+        navigate("/reels") // Redirect to reels feed after registration
 
     };
 

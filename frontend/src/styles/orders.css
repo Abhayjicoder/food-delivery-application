@@ -1,0 +1,146 @@
+.orders-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.orders-loading,
+.orders-error,
+.orders-empty {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+
+.orders-error {
+    color: #dc3545;
+}
+
+.orders-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.order-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.order-time {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.order-customer {
+    margin-bottom: 1rem;
+}
+
+.order-items {
+    margin: 1rem 0;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.order-total {
+    margin: 1rem 0;
+    padding-top: 0.5rem;
+    border-top: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+.order-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    margin: 0.5rem 0;
+}
+
+.order-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.order-actions button {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    min-width: 120px;
+    transition: background-color 0.2s;
+}
+
+.btn-confirm {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #218838;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+.btn-prepare {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-prepare:hover {
+    background-color: #0056b3;
+}
+
+.btn-ready {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-ready:hover {
+    background-color: #138496;
+}
+
+.btn-deliver {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-deliver:hover {
+    background-color: #5a6268;
+}

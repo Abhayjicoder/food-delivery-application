@@ -1,0 +1,21 @@
+@import './theme.css';
+
+.about-page { max-width: 1000px; margin: 24px auto; padding: 16px; color: var(--color-text); }
+.about-header { text-align: center; margin-bottom: 24px; }
+.about-header h1 { margin: 8px 0 4px 0; font-size: 2rem; }
+.about-tagline { color: var(--color-text-secondary); }
+
+.about-section { background: var(--color-surface); border:1px solid var(--color-border); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow-md); }
+.about-section.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.about-card { background: var(--color-surface-alt); border:1px solid var(--color-border); border-radius: 10px; padding: 12px; }
+.about-card h3 { margin: 0 0 8px 0; }
+.about-card ul { margin: 0; padding-left: 18px; }
+
+.about-team h2 { margin: 16px 0; }
+.team-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.team-card { background: var(--color-surface); border:1px solid var(--color-border); border-radius: 12px; padding: 12px; text-align:center; }
+.team-card img { width: 64px; height: 64px; display:block; margin: 0 auto 8px auto; }
+.team-card h4 { margin: 0 0 4px 0; }
+.team-card p { margin: 0; color: var(--color-text-secondary); }
+
+

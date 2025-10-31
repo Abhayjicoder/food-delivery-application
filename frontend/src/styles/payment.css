@@ -1,0 +1,52 @@
+.payment-form-container {
+    padding: 20px;
+    background: var(--color-surface);
+    border-radius: 14px;
+    margin-top: 20px;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+}
+
+.payment-form { margin-top: 16px; }
+
+.payment-form-container h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.payment-form .form-row {
+    margin-bottom: 16px;
+    padding: 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface-alt);
+}
+
+.payment-error {
+    color: #e53e3e;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.payment-button {
+    width: 100%;
+    padding: 14px 16px;
+    background: linear-gradient(180deg, var(--color-accent), var(--color-accent-hover));
+    color: #000;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: .2px;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(var(--color-accent-rgb), 0.16);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.payment-button:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(var(--color-accent-rgb), 0.22); }
+.payment-button:active { transform: translateY(0); }
+
+.payment-button:disabled {
+    background: var(--color-disabled);
+    cursor: not-allowed;
+}

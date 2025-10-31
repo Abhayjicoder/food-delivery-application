@@ -7,6 +7,16 @@
   overflow: hidden; /* parent hides overscroll glow on iOS */
 }
 
+/* Fixed header with logo at top-left */
+.reels-header {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0) + 12px);
+  left: 12px;
+  z-index: 80;
+  pointer-events: none; /* let interactions pass to feed */
+}
+.reels-header .app-logo { pointer-events: auto; }
+
 /* Vertical feed with snap scrolling */
 .reels-feed {
   height: 100%;
@@ -62,7 +72,7 @@
   position: relative;
   width: 100%;
   padding: var(--space-6);
-  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 72px); /* make space for bottom nav */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 110px); /* extra space above bottom nav */
   display: flex;
   flex-direction: column;
   padding-right: 4.5rem;
@@ -84,6 +94,12 @@
   max-width: 90ch;
 }
 
+.reel-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .reel-btn {
   align-self: flex-start;
   background: var(--color-accent);
@@ -95,11 +111,23 @@
   text-decoration: none;
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
 }
 
 .reel-btn:hover { background: var(--color-accent-hover); }
 .reel-btn:active { transform: translateY(1px); }
 .reel-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.reel-btn.add-to-cart {
+  background: #28a745;
+}
+
+.reel-btn.add-to-cart:hover {
+  background: #218838;
+}
 
 /* Desktop tweaks */
 @media (min-width: 768px) {
@@ -111,7 +139,7 @@
 .reel-actions {
   position: absolute;
   right: 10px;
-  bottom: 96px; /* above bottom CTA and nav */
+  bottom: 110px; /* keep actions above bottom CTA and nav */
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -133,6 +161,11 @@
 
 .reel-action:active { transform: translateY(1px); }
 
+/* Active states for like and save */
+.reel-action.is-liked svg { fill: var(--color-danger, #ff6b6b); stroke: var(--color-danger, #ff6b6b); }
+.reel-action.is-saved svg { fill: #fff; stroke: #fff; }
+.reel-action svg { transition: fill .18s ease, stroke .18s ease, transform .18s ease; }
+
 .reel-action__count {
   color: #fff;
   text-align: center;
@@ -149,4 +182,128 @@
 
 .empty-state{
   position: absolute; inset: 0; display: grid; place-items: center; color: #fff;
+}
+
+/* Saved collage styles */
+.saved-page { padding: 1rem; position: relative; }
+.saved-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; color:#fff; margin-bottom:1rem }
+.saved-header h2 { margin:0; font-size:1.25rem }
+.saved-count { color: var(--color-accent); font-weight:700 }
+
+.saved-collage { display: grid; gap:8px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.collage-item { position: relative; overflow: hidden; border-radius:8px; padding:0; border:0; background:#111; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.collage-item { aspect-ratio: 1 / 1; }
+.collage-thumb { width:100%; height:100%; object-fit:contain; display:block; background:#000 }
+
+/* Overlay with actions inside each collage tile */
+.collage-overlay { position:absolute; inset:auto 8px 8px 8px; display:flex; gap:8px; align-items:center; justify-content:flex-end; pointer-events:auto }
+.collage-like { width:38px; height:38px; border-radius:999px; display:grid; place-items:center; background: rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.08); cursor:pointer; transition: transform .15s ease, box-shadow .15s ease }
+.collage-like svg { display:block }
+.collage-like:active { transform: translateY(1px) }
+.collage-like[aria-pressed="true"] { background: linear-gradient(180deg, var(--color-accent), var(--color-accent-hover)); box-shadow: 0 6px 14px rgba(var(--color-accent-rgb),0.22) }
+.collage-like-count { color:#fff; font-weight:700; text-shadow:0 1px 2px rgba(0,0,0,0.6) }
+
+/* When a collage item is liked, show the heart in the danger color */
+.collage-like[aria-pressed="true"] svg { fill: var(--color-danger, #ff6b6b); stroke: var(--color-danger, #ff6b6b); }
+
+/* Hover animations for tiles */
+.collage-item { transition: transform .22s cubic-bezier(.16,.84,.44,1), box-shadow .22s ease }
+.collage-item:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.5) }
+
+/* like pulse */
+@keyframes like-pop { 0% { transform: scale(.9) } 50% { transform: scale(1.18) } 100% { transform: scale(1) } }
+.collage-like[aria-pressed="true"] svg { animation: like-pop .36s ease }
+
+.more-overlay {
+  position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800; color:#fff; background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
+}
+
+.saved-actions { margin-top: 1rem; display:flex; gap:0.5rem }
+.clear-btn { background:transparent; color:var(--color-accent); border:1px solid rgba(var(--color-accent-rgb),0.12); padding:8px 12px; border-radius:6px; cursor:pointer }
+
+@media (max-width: 720px) {
+  .saved-collage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Floating open reels button */
+.open-reels-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 92px; /* above bottom nav */
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, var(--color-accent), var(--color-accent-hover));
+  box-shadow: 0 10px 30px rgba(var(--color-accent-rgb),0.16);
+  border: 1px solid rgba(255,255,255,0.06);
+  z-index: 60;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.open-reels-btn:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(var(--color-accent-rgb),0.22); }
+.open-reels-btn:active { transform: translateY(1px); }
+
+@keyframes float-btn {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-6px) }
+  100% { transform: translateY(0) }
+}
+.open-reels-btn { animation: float-btn 3.6s ease-in-out infinite; }
+
+/* Home big title (animated) */
+.home-hero {
+  position: fixed;
+  top: 12vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 70;
+}
+
+.home-title {
+  font-size: clamp(36px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(0);
+  animation: home-title-breathe 6s ease-in-out infinite;
+}
+
+.home-title__text { color: var(--color-text); text-shadow: 0 8px 30px rgba(0,0,0,0.6); }
+.home-title__accent {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+  color: #000;
+  padding: 6px 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(var(--color-accent-rgb), 0.14);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-title__accent::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%; bottom: 0;
+  width: 60%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  transform: skewX(-20deg);
+  animation: home-title-shine 2.8s linear infinite;
+}
+
+@keyframes home-title-shine {
+  0% { left: -60%; }
+  50% { left: 140%; }
+  100% { left: 140%; }
+}
+
+@keyframes home-title-breathe {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
 }

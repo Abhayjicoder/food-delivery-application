@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import Logo from './Logo'
 
 // Reusable feed for vertical reels
 // Props:
@@ -7,7 +8,8 @@ import { Link } from 'react-router-dom'
 // - onLike: (item) => void | Promise<void>
 // - onSave: (item) => void | Promise<void>
 // - emptyMessage: string
-const ReelFeed = ({ items = [], onLike, onSave, emptyMessage = 'No videos yet.' }) => {
+// - onAddToCart: (item) => void | Promise<void>
+const ReelFeed = ({ items = [], onLike, onSave, onAddToCart, emptyMessage = 'No videos yet.' }) => {
   const videoRefs = useRef(new Map())
 
   useEffect(() => {
@@ -37,6 +39,9 @@ const ReelFeed = ({ items = [], onLike, onSave, emptyMessage = 'No videos yet.' 
 
   return (
     <div className="reels-page">
+      <header className="reels-header" role="banner">
+        <Logo position="top-left" />
+      </header>
       <div className="reels-feed" role="list">
         {items.length === 0 && (
           <div className="empty-state">
@@ -58,12 +63,13 @@ const ReelFeed = ({ items = [], onLike, onSave, emptyMessage = 'No videos yet.' 
 
             <div className="reel-overlay">
               <div className="reel-overlay-gradient" aria-hidden="true" />
-              <div className="reel-actions">
+                <div className="reel-actions">
                 <div className="reel-action-group">
                   <button
                     onClick={onLike ? () => onLike(item) : undefined}
-                    className="reel-action"
+                    className={`reel-action ${item._liked || item.liked ? 'is-liked' : ''}`}
                     aria-label="Like"
+                    aria-pressed={!!(item._liked || item.liked)}
                   >
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-8.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
@@ -74,9 +80,10 @@ const ReelFeed = ({ items = [], onLike, onSave, emptyMessage = 'No videos yet.' 
 
                 <div className="reel-action-group">
                   <button
-                    className="reel-action"
+                    className={`reel-action ${item._saved || item.saved ? 'is-saved' : ''}`}
                     onClick={onSave ? () => onSave(item) : undefined}
                     aria-label="Bookmark"
+                    aria-pressed={!!(item._saved || item.saved)}
                   >
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z" />
@@ -97,9 +104,18 @@ const ReelFeed = ({ items = [], onLike, onSave, emptyMessage = 'No videos yet.' 
 
               <div className="reel-content">
                 <p className="reel-description" title={item.description}>{item.description}</p>
-                {item.foodPartner && (
-                  <Link className="reel-btn" to={"/food-partner/" + item.foodPartner} aria-label="Visit store">Visit store</Link>
-                )}
+                <div className="reel-buttons">
+                  {item.foodPartner && (
+                    <Link className="reel-btn" to={"/food-partner/" + item.foodPartner} aria-label="Visit store">Visit store</Link>
+                  )}
+                  <button
+                    className="reel-btn add-to-cart"
+                    onClick={() => onAddToCart(item)}
+                    aria-label="Add to cart"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           </section>
