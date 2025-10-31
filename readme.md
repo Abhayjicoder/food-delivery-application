@@ -39,36 +39,17 @@ Users can explore restaurants, order food, pay securely using Stripe, and upload
 
 ---
 
-## 📁 Folder Structure
-
-project-root/
-│
-├── backend/
-│ ├── src/
-│ │ ├── controllers/
-│ │ ├── models/
-│ │ ├── routes/
-│ │ ├── middlewares/
-│ │ ├── utils/
-│ │ └── app.js
-│ ├── .env
-│ └── package.json
-│
-├── frontend/
-│ ├── src/
-│ ├── public/
-│ ├── .env
-│ └── package.json
-│
-└── README.md
 
 
 
 
 👨‍💻 Author
+
 Abhay Singh
 Full Stack Developer | MERN Stack | AI & Web Enthusiast
 
 📧 Email: abhay88716@gmail.com
+
 💼 GitHub: https://github.com/Abhayjicoder
+
 🪪 License: MIT
